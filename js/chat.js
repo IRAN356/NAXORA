@@ -1,25 +1,36 @@
 const input = document.getElementById("messageInput");
 const button = document.getElementById("sendBtn");
+const chatBox = document.getElementById("chatBox");
 
-button.addEventListener("click", function () {
-    const message = input.value.trim();
-
-    if (message === "") return;
-
-    const chatBox = document.getElementById("chatBox");
-
-    const msg = document.createElement("div");
-    msg.textContent = message;
-
-    chatBox.appendChild(msg);
-
-    input.value = "";
-});
+// پیام اولیه
 window.addEventListener("load", function () {
-    const chatBox = document.getElementById("chatBox");
-
     const botMsg = document.createElement("div");
     botMsg.textContent = "سلام 👋";
+    chatBox.appendChild(botMsg);
+});
+
+// ارسال پیام
+button.addEventListener("click", function () {
+    const message = input.value.trim();
+    if (message === "") return;
+
+    // پیام کاربر
+    const userMsg = document.createElement("div");
+    userMsg.textContent = message;
+    chatBox.appendChild(userMsg);
+
+    // پاسخ بات
+    const botMsg = document.createElement("div");
+
+    if (message.includes("تو کی هستی")) {
+        botMsg.textContent = "من یک چت‌بات ساده هستم 🤖";
+    } else if (message.includes("سلام")) {
+        botMsg.textContent = "سلام 👋 خوش اومدی";
+    } else {
+        botMsg.textContent = "متوجه نشدم 😅";
+    }
 
     chatBox.appendChild(botMsg);
+
+    input.value = "";
 });
