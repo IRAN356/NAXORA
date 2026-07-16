@@ -15,3 +15,11 @@ button.addEventListener("click", function () {
 
     input.value = "";
 });
+window.addEventListener("load", function () {
+    const chatBox = document.getElementById("chatBox");
+
+    const botMsg = document.createElement("div");
+    botMsg.textContent = "سلام 👋";
+
+    chatBox.appendChild(botMsg);
+});
