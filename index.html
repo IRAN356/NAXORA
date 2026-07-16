@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>NAXORA</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>NAXORA</title>
 </head>
-
 <body>
 
-  <h1>به NAXORA خوش اومدی</h1>
+<button onclick="startChat()">شروع تجربه</button>
 
-  <button id="startBtn">شروع تجربه</button>
+<div id="chat" style="display:none;">
+    <input id="input" placeholder="پیام بنویس...">
+    <button onclick="sendMessage()">ارسال</button>
+    <p id="response"></p>
+</div>
 
-  <script src="main.js"></script>
+<script>
+function startChat() {
+    document.getElementById("chat").style.display = "block";
+}
+
+function sendMessage() {
+    let msg = document.getElementById("input").value;
+
+    fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({message: msg})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("response").innerText = data.reply;
+    });
+}
+</script>
 
 </body>
 </html>
